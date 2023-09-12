@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClasses } from './api';
-import { formatDate, getNextWeekDate } from './helpers';
+import { formatClasses, formatDate, getNextWeekDate } from './helpers';
 
 const today = new Date();
 
@@ -11,9 +11,11 @@ const Home = async () => {
     getNextWeekDate(today),
   );
 
+  const formattedClasses = formatClasses(classes);
+
   return (
     <main>
-      <pre>{JSON.stringify(classes, null, 2)}</pre>
+      <pre>{JSON.stringify(formattedClasses, null, 2)}</pre>
     </main>
   );
 };
