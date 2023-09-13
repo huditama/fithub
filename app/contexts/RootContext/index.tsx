@@ -1,39 +1,50 @@
 'use client';
 
-import { DatesData, FormattedScheduleData } from '@/types';
 import React, {
   FC,
   ReactNode,
   createContext,
   useState,
   useMemo,
+  Dispatch,
 } from 'react';
+
+import { DatesData, FormattedScheduleData } from '@/types';
 
 const initialAppState: {
   selectedDate: DatesData['id'];
+  setSelectedDate: Dispatch<React.SetStateAction<DatesData['id']>>;
   classes: FormattedScheduleData[];
+  setClasses: Dispatch<React.SetStateAction<FormattedScheduleData[]>>;
 } = {
   selectedDate: '',
+  setSelectedDate: () => { },
   classes: [],
+  setClasses: () => { },
 };
 
-type AppState = typeof initialAppState;
-type SetAppState = React.Dispatch<React.SetStateAction<AppState>>;
-
-export const RootContext = createContext<{
-  appState: AppState;
-  setAppState: SetAppState;
-}>({ appState: initialAppState, setAppState: () => { } });
+export const RootContext = createContext(initialAppState);
 
 type RootProviderProps = {
   children: ReactNode;
 };
 
 const RootProvider: FC<RootProviderProps> = ({ children }) => {
-  const [appState, setAppState] = useState(initialAppState);
+  const [selectedDate, setSelectedDate] = useState<DatesData['id']>('');
+  const [classes, setClasses] = useState<FormattedScheduleData[]>([]);
 
   // Memoize the context value to prevent unnecessary re-renders
-  const contextValue = useMemo(() => ({ appState, setAppState }), [appState, setAppState]);
+  const contextValue = useMemo(() => ({
+    selectedDate,
+    setSelectedDate,
+    classes,
+    setClasses,
+  }), [
+    selectedDate,
+    setSelectedDate,
+    classes,
+    setClasses,
+  ]);
 
   return (
     <RootContext.Provider value={contextValue}>

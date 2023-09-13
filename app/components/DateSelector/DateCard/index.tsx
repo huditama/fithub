@@ -7,26 +7,19 @@ import { capitalizeFirstThreeLetters } from '@/helpers';
 import { RootContext } from '@/contexts/RootContext';
 
 type DateCardProps = {
-  data: DatesData,
+  data: DatesData;
+  isSelected: boolean;
 };
 
-const DateCard: FC<DateCardProps> = ({ data }) => {
-  const rootContext = useContext(RootContext);
-  const appState = rootContext?.appState;
-  const setAppState = rootContext?.setAppState;
-
-  const selectedDate = appState?.selectedDate;
-  const isSelected = selectedDate === data.id;
+const DateCard: FC<DateCardProps> = ({ data, isSelected }) => {
+  const { setSelectedDate } = useContext(RootContext);
 
   const formatDay = capitalizeFirstThreeLetters(data.day);
   const formatMonth = capitalizeFirstThreeLetters(data.month);
   const textColorClass = isSelected ? '' : 'unselected-text';
 
   const onPressCard = (dateId: DatesData['id']) => () => {
-    setAppState({
-      ...appState,
-      selectedDate: dateId,
-    });
+    setSelectedDate(dateId);
   };
 
   return (

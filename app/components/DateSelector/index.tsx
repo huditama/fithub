@@ -11,15 +11,11 @@ type DateSelectorProps = {
 };
 
 const DateSelector: FC<DateSelectorProps> = ({ dates }) => {
-  const rootContext = useContext(RootContext);
-  const appState = rootContext?.appState;
-  const setAppState = rootContext?.setAppState;
+  const { selectedDate, setSelectedDate } = useContext(RootContext);
 
   useEffect(() => {
-    setAppState({
-      ...appState,
-      selectedDate: dates[0].id,
-    });
+    const todayDate = dates[0].id;
+    setSelectedDate(todayDate);
   }, [dates]);
 
   return (
@@ -28,6 +24,7 @@ const DateSelector: FC<DateSelectorProps> = ({ dates }) => {
         <DateCard
           key={item.id}
           data={item}
+          isSelected={selectedDate === item.id}
         />
       ))}
     </div>
