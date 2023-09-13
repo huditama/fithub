@@ -17,5 +17,12 @@
         "unnamedComponents": "arrow-function"
       }
     ]
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.json"
+      }
+    }
   }
 }
