@@ -1,7 +1,13 @@
 import React from 'react';
 
-import { getClasses } from './api';
-import { formatClasses, formatDate, getNextWeekDate } from './helpers';
+import { getClasses } from '@/api';
+import {
+  formatClasses,
+  formatDate,
+  formatDates,
+  getNextWeekDate,
+} from '@/helpers';
+import DateSelector from '@/components/DateSelector';
 
 const today = new Date();
 
@@ -12,10 +18,12 @@ const Home = async () => {
   );
 
   const formattedClasses = formatClasses(classes);
+  const formattedDates = formatDates(classes);
 
   return (
     <main>
-      <pre>{JSON.stringify(formattedClasses, null, 2)}</pre>
+      <DateSelector dates={formattedDates} />
+      {/* <pre>{JSON.stringify(formattedDates, null, 2)}</pre> */}
     </main>
   );
 };

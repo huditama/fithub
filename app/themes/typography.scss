@@ -1,0 +1,55 @@
+// Define font sizes and line heights
+$base-font-size: 16px;
+$base-line-height: 1.5;
+
+// Heading sizes
+$heading-1-size: 2.5rem;
+$heading-2-size: 2rem;
+$heading-3-size: 1.5rem;
+$heading-4-size: 1.25rem;
+
+// Text styles
+$regular-font-weight: 400;
+$bold-font-weight: 600;
+$italic-font-style: italic;
+
+// Define CSS classes for various text elements
+.text-base {
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  font-weight: $regular-font-weight;
+}
+
+.text-bold {
+  font-weight: $bold-font-weight;
+}
+
+.text-italic {
+  font-style: $italic-font-style;
+}
+
+.heading-1 {
+  font-size: $heading-1-size;
+}
+
+.heading-2 {
+  font-size: $heading-2-size;
+}
+
+.heading-3 {
+  font-size: $heading-3-size;
+}
+
+.heading-4 {
+  font-size: $heading-4-size;
+}
+
+// Additional font weights and styles
+.text-semibold {
+  font-weight: 500; // Customize the weight as needed
+}
+
+.text-bold-italic {
+  font-weight: $bold-font-weight;
+  font-style: $italic-font-style;
+}

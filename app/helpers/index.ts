@@ -1,4 +1,4 @@
-import { ClassData, ScheduleData } from '../types';
+import { ClassData, ScheduleData } from '@/types';
 
 export const formatDate = (date: Date) => {
   const year = date.getFullYear();
@@ -46,9 +46,34 @@ export const formatClasses = (classesData: ScheduleData) => {
     const sortClasses = (unsortedClasses: ClassData[]) => unsortedClasses.sort((a, b) => a.timeSchedule.localeCompare(b.timeSchedule));
 
     return {
-      date,
+      id: date,
       morning: sortClasses(morningClasses),
       evening: sortClasses(eveningClasses),
     };
   });
 };
+
+export const formatDates = (classesData: ClassData) => Object.keys(classesData).map((dateKey) => {
+  // Extract year, month, and day components from the dateKey string
+  const year = parseInt(dateKey.slice(0, 4), 10);
+  const month = parseInt(dateKey.slice(4, 6), 10) - 1; // Months are zero-based
+  const day = parseInt(dateKey.slice(6), 10);
+
+  // Create a JavaScript Date object for the specified date
+  const formattedDate = new Date(year, month, day);
+
+  // Get the day of the week in "Monday" format
+  const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const formattedDay = daysOfWeek[formattedDate.getDay()];
+
+  // Create the formatted object
+  return {
+    id: dateKey,
+    day: formattedDay,
+    date: day,
+    month: formattedDate.toLocaleString('en-us', { month: 'long' }),
+    year,
+  };
+});
+
+export const capitalizeFirstThreeLetters = (string: string) => string.slice(0, 3).toUpperCase();

@@ -1,4 +1,4 @@
-export interface ClassData {
+export type ClassData = {
   timeCategory: string;
   instructor: string;
   locationSchedule: string;
@@ -9,8 +9,16 @@ export interface ClassData {
   classDifficulty: string;
   backgroundImage: string;
   imageDetail: string;
-}
+};
 
-export interface ScheduleData {
+export type ScheduleData = {
   [data: string]: ClassData[];
-}
+};
+
+export type DatesData = {
+  id: string;
+  day: string;
+  date: number;
+  month: string;
+  year: number;
+};
