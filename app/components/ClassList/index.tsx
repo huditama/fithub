@@ -2,8 +2,9 @@
 
 import React, { FC, useContext, useEffect } from 'react';
 
+import ClassCard from '@/components/ClassList/ClassCard';
 import { RootContext } from '@/contexts/RootContext';
-import { FormattedScheduleData } from '@/types';
+import { ClassData, FormattedScheduleData } from '@/types';
 
 type ClassListProps = {
   classes: FormattedScheduleData[];
@@ -21,8 +22,36 @@ const ClassList: FC<ClassListProps> = ({ classes }) => {
   }, [classes]);
 
   const classesInChosenDate = classesFromContext.find((item) => item.id === selectedDate);
+  const morningClasses = classesInChosenDate?.morning;
+  const eveningClasses = classesInChosenDate?.evening;
 
-  return <pre>{JSON.stringify(classesInChosenDate, null, 2)}</pre>;
+  const renderClassList = (classesData: ClassData[]) => (
+    <div className="classes-container">
+      {classesData.map((item) => <ClassCard classData={item} />)}
+    </div>
+  );
+
+  return (
+    <div className="class-list">
+      {
+        morningClasses?.length ? (
+          <div className="time-category">
+            <p className="heading-3 text-bold">MORNING</p>
+            {renderClassList(morningClasses)}
+          </div>
+        ) : null
+      }
+
+      {
+        eveningClasses?.length ? (
+          <div className="time-category">
+            <p className="heading-3 text-bold">EVENING</p>
+            {renderClassList(eveningClasses)}
+          </div>
+        ) : null
+      }
+    </div>
+  );
 };
 
 export default ClassList;

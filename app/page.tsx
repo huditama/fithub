@@ -23,8 +23,10 @@ const Home = async () => {
 
   return (
     <main>
-      <DateSelector dates={formattedDates} />
-      <ClassList classes={formattedClasses} />
+      <div className="container">
+        <DateSelector dates={formattedDates} />
+        <ClassList classes={formattedClasses} />
+      </div>
     </main>
   );
 };

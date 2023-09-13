@@ -11,15 +11,47 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.flex-end {
+  align-self: flex-end;
+}
+
+.container {
+  min-height: 100vh;
+  max-width: 992px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.space-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.spacer {
+  margin-top: 16px;
+}
+
 .date-selector {
   display: flex;
-  max-width: 100%; /* Ensure the container doesn't exceed the viewport width */
-  overflow-x: auto; /* Enable horizontal scrolling when content exceeds the width */
+  max-width: 100%;
+  overflow-x: auto;
+
+  @media screen and (max-width: 992px) {
+    margin: 0px 16px 0px 16px;
+  }
 
   .date-card {
     font: inherit;
-    flex: 1; /* Make each card equally distribute available space */
-    margin: 8px; /* Add spacing between cards */
+    flex: 1;
+    margin: 8px 0px 8px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,6 +60,10 @@
     padding: 8px 16px 8px 16px;
     cursor: pointer;
     border: 0;
+
+    &:not(:last-child) {
+      margin-right: 16px; // Adjust the margin value as needed
+    }
 
     @media screen and (max-width: 768px) {
       .text-base {
@@ -49,8 +85,66 @@
   }
 }
 
+.class-list {
+  @media screen and (max-width: 992px) {
+    margin: 0px 16px 0px 16px;
+  }
+
+  .time-category {
+    margin-top: 16px;
+  }
+
+  .classes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .class-card {
+      width: calc(50% - 8px);
+      border-radius: 8px;
+      padding: 16px;
+      box-sizing: border-box;
+      margin-bottom: 16px;
+      color: white;
+
+      .text-base {
+        font-size: 14px;
+      }
+
+      .small-text {
+        font-size: 12px;
+      }
+
+      .dumbbell {
+        margin-right: 8px;
+      }
+
+      .duration {
+        background-color: white;
+        border-radius: 8px;
+        padding: 3px 8px 3px 8px;
+      }
+
+      @media screen and (max-width: 480px) {
+        width: 100%;
+
+        .text-base {
+          font-size: 12px;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .heading-2 {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+}
+
+
 ::-webkit-scrollbar {
-  width: 0; /* Remove scrollbar width */
-  height: 0; /* Remove scrollbar height */
-  display: none; /* Hide scrollbar */
+  width: 0;
+  height: 0;
+  display: none;
 }
