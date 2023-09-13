@@ -15,6 +15,12 @@ export type ScheduleData = {
   [data: string]: ClassData[];
 };
 
+export type FormattedScheduleData = {
+  id: DatesData['id'];
+  morning: ClassData[];
+  evening: ClassData[];
+};
+
 export type DatesData = {
   id: string;
   day: string;

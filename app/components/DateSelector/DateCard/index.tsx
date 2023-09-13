@@ -1,25 +1,32 @@
 'use client';
 
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 
 import { DatesData } from '@/types';
 import { capitalizeFirstThreeLetters } from '@/helpers';
+import { RootContext } from '@/contexts/RootContext';
 
 type DateCardProps = {
   data: DatesData,
-  onPress: (dateId: DatesData['id']) => void,
-  isSelected: boolean
 };
 
-const DateCard: FC<DateCardProps> = ({ data, onPress, isSelected }) => {
+const DateCard: FC<DateCardProps> = ({ data }) => {
+  const rootContext = useContext(RootContext);
+  const appState = rootContext?.appState;
+  const setAppState = rootContext?.setAppState;
+
+  const selectedDate = appState?.selectedDate;
+  const isSelected = selectedDate === data.id;
+
   const formatDay = capitalizeFirstThreeLetters(data.day);
   const formatMonth = capitalizeFirstThreeLetters(data.month);
   const textColorClass = isSelected ? '' : 'unselected-text';
 
   const onPressCard = (dateId: DatesData['id']) => () => {
-    if (onPress) {
-      onPress(dateId);
-    }
+    setAppState({
+      ...appState,
+      selectedDate: dateId,
+    });
   };
 
   return (

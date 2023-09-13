@@ -1,29 +1,33 @@
 'use client';
 
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 
 import DateCard from '@/components/DateSelector/DateCard';
 import { DatesData } from '@/types';
+import { RootContext } from '@/contexts/RootContext';
 
 type DateSelectorProps = {
   dates: DatesData[];
 };
 
 const DateSelector: FC<DateSelectorProps> = ({ dates }) => {
-  const [selectedDate, setSelectedDate] = useState<DatesData['id']>(dates[0].id);
+  const rootContext = useContext(RootContext);
+  const appState = rootContext?.appState;
+  const setAppState = rootContext?.setAppState;
 
-  const onPressDateCard = (dateId: DatesData['id']) => {
-    setSelectedDate(dateId);
-  };
+  useEffect(() => {
+    setAppState({
+      ...appState,
+      selectedDate: dates[0].id,
+    });
+  }, [dates]);
 
   return (
     <div className="date-selector">
       {dates.map((item) => (
         <DateCard
           key={item.id}
-          onPress={onPressDateCard}
           data={item}
-          isSelected={item.id === selectedDate}
         />
       ))}
     </div>
