@@ -13,11 +13,14 @@ $regular-font-weight: 400;
 $bold-font-weight: 600;
 $italic-font-style: italic;
 
-// Define CSS classes for various text elements
+// Set the default text color to black for all elements
+$text-color: black;
+
 .text-base {
   font-size: $base-font-size;
   line-height: $base-line-height;
   font-weight: $regular-font-weight;
+  color: $text-color;
 }
 
 .text-bold {
@@ -30,23 +33,27 @@ $italic-font-style: italic;
 
 .heading-1 {
   font-size: $heading-1-size;
+  color: $text-color;
 }
 
 .heading-2 {
   font-size: $heading-2-size;
+  color: $text-color;
 }
 
 .heading-3 {
   font-size: $heading-3-size;
+  color: $text-color;
 }
 
 .heading-4 {
   font-size: $heading-4-size;
+  color: $text-color;
 }
 
-// Additional font weights and styles
+
 .text-semibold {
-  font-weight: 500; // Customize the weight as needed
+  font-weight: 500;
 }
 
 .text-bold-italic {

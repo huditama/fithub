@@ -39,8 +39,8 @@ const ClassCard: FC<ClassCardProps> = ({ classData }) => {
         <img alt={`${classType} icon`} src={iconSrc} />
         <p style={{ fontSize: '20px' }} className="text-bold">{timeSchedule}</p>
       </div>
-      <p className="heading-2 text-bold">{className}</p>
-      <p className="text-base">{`By ${formatInstructorName}`}</p>
+      <p style={{ color: 'white' }} className="heading-2 text-bold">{className}</p>
+      <p style={{ color: 'white' }} className="text-base">{`By ${formatInstructorName}`}</p>
       <div className="space-between spacer">
         <div className="row">
           <img className="dumbbell" alt="dumbell icon" src={Icons.DUMBBELL} />
