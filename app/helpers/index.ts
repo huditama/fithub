@@ -53,27 +53,81 @@ export const formatClasses = (classesData: ScheduleData) => {
   });
 };
 
-export const formatDates = (classesData: ClassData) => Object.keys(classesData).map((dateKey) => {
-  // Extract year, month, and day components from the dateKey string
-  const year = parseInt(dateKey.slice(0, 4), 10);
-  const month = parseInt(dateKey.slice(4, 6), 10) - 1; // Months are zero-based
-  const day = parseInt(dateKey.slice(6), 10);
+export const formatDates = (startDateStr: string, endDateStr: string) => {
+  // Initialize an empty array to store the formatted dates
+  const formattedDates = [];
 
-  // Create a JavaScript Date object for the specified date
-  const formattedDate = new Date(year, month, day);
+  // Convert the start date and end date strings to JavaScript Date objects in UTC timezone
+  const startDate = new Date(startDateStr);
+  const endDate = new Date(endDateStr);
 
   // Get the day of the week in "Monday" format
   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const formattedDay = daysOfWeek[formattedDate.getDay()];
 
-  // Create the formatted object
-  return {
-    id: dateKey,
-    day: formattedDay,
-    date: day,
-    month: formattedDate.toLocaleString('en-us', { month: 'long' }),
-    year,
-  };
-});
+  // Loop through the date range and format each date
+  const currentDate = new Date(startDate);
+  while (currentDate <= endDate) {
+    const formattedDay = daysOfWeek[
+      currentDate.getUTCDay() // Use getUTCDay() to ensure UTC timezone
+    ];
+    const year = currentDate.getUTCFullYear();
+    const month = String(currentDate.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(currentDate.getUTCDate()).padStart(2, '0');
+
+    formattedDates.push({
+      id: `${year}${month}${day}`,
+      day: formattedDay,
+      date: currentDate.getUTCDate(),
+      month: currentDate.toLocaleString('en-US', { month: 'long' }),
+      year,
+    });
+
+    // Move to the next day
+    currentDate.setUTCDate(currentDate.getUTCDate() + 1);
+  }
+
+  return formattedDates;
+};
 
 export const capitalizeFirstThreeLetters = (string: string) => string.slice(0, 3).toUpperCase();
+
+// eslint-disable-next-line max-len
+const isLeapYear = (year: number): boolean => (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+
+export const getWeekStartEnd = (dateStr: string): [string, string] => {
+  // Parse the input date string
+  const date = new Date(dateStr);
+
+  // Calculate the weekday (0 for Sunday, 1 for Monday, ..., 6 for Saturday)
+  const weekday = date.getDay();
+
+  // Calculate the starting date of the week (Monday)
+  const startOfWeek = new Date(date);
+  startOfWeek.setDate(date.getDate() - weekday + (weekday === 0 ? -6 : 1));
+
+  // Calculate the ending date of the week (Sunday)
+  const endOfWeek = new Date(startOfWeek);
+  endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+  // Check if the ending date of the week is in a different month
+  if (startOfWeek.getMonth() !== endOfWeek.getMonth()) {
+    if (startOfWeek.getMonth() < endOfWeek.getMonth()) {
+      // Start date is in the previous month
+      startOfWeek.setMonth(startOfWeek.getMonth() - 1);
+    } else {
+      // End date is in the next month
+      endOfWeek.setMonth(endOfWeek.getMonth() + 1);
+    }
+  }
+
+  // Check for leap year and adjust the ending date if necessary
+  if (isLeapYear(startOfWeek.getFullYear()) && startOfWeek.getMonth() === 1) {
+    endOfWeek.setDate(endOfWeek.getDate() - 1);
+  }
+
+  // Format the dates as strings in the "YYYY-MM-DD" format
+  const startDateStr = formatDate(startOfWeek);
+  const endDateStr = formatDate(endOfWeek);
+
+  return [startDateStr, endDateStr];
+};

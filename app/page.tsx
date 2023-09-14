@@ -4,22 +4,24 @@ import {
   formatClasses,
   formatDate,
   formatDates,
-  getNextWeekDate,
+  getWeekStartEnd,
 } from '@/helpers';
 import { getClasses } from '@/api';
 import ClassList from '@/components/ClassList';
 import DateSelector from '@/components/DateSelector';
 
 const today = new Date();
+const formattedDateToday = formatDate(today);
+const [startDate, endDate] = getWeekStartEnd(formattedDateToday);
 
 const Home = async () => {
   const classes = await getClasses(
-    formatDate(today),
-    getNextWeekDate(today),
+    startDate,
+    endDate,
   );
 
   const formattedClasses = formatClasses(classes);
-  const formattedDates = formatDates(classes);
+  const formattedDates = formatDates(startDate, endDate);
 
   return (
     <main>

@@ -27,7 +27,7 @@ const ClassList: FC<ClassListProps> = ({ classes }) => {
 
   const renderClassList = (classesData: ClassData[]) => (
     <div className="classes-container">
-      {classesData.map((item) => <ClassCard classData={item} />)}
+      {classesData.map((item) => <ClassCard key={JSON.stringify(item)} classData={item} />)}
     </div>
   );
 
