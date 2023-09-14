@@ -33,23 +33,27 @@ const ClassList: FC<ClassListProps> = ({ classes }) => {
 
   return (
     <div className="class-list">
-      {
-        morningClasses?.length ? (
-          <div className="time-category">
-            <p className="heading-4 text-bold">MORNING</p>
-            {renderClassList(morningClasses)}
-          </div>
-        ) : null
-      }
+      <div className="time-category">
+        {
+          morningClasses?.length ? (
+            <>
+              <p className="heading-4 text-bold">MORNING</p>
+              {renderClassList(morningClasses)}
+            </>
+          ) : null
+        }
 
-      {
-        eveningClasses?.length ? (
-          <div className="time-category">
-            <p className="heading-4 text-bold">EVENING</p>
-            {renderClassList(eveningClasses)}
-          </div>
-        ) : null
-      }
+        {
+          eveningClasses?.length ? (
+            <>
+              <p className="heading-4 text-bold">EVENING</p>
+              {renderClassList(eveningClasses)}
+            </>
+          ) : null
+        }
+
+        {classesFromContext.length && !morningClasses?.length && !eveningClasses?.length ? <p className="heading-4 text-bold">There are no classes!</p> : null}
+      </div>
     </div>
   );
 };
