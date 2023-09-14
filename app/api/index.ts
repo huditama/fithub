@@ -1,5 +1,7 @@
+import { Endpoints } from '@/api/endpoints';
+
 export const getClasses = async (dateFrom: string, dateTo: string) => {
-  const res = await fetch('https://asia-southeast2-thehub-965c7.cloudfunctions.net/prodtakananiumnv02/schedules/loadSchedulesPublic', {
+  const res = await fetch(Endpoints.GET_SCHEDULES, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json', // Set the appropriate content type
