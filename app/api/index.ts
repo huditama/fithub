@@ -4,7 +4,7 @@ export const getClasses = async (dateFrom: string, dateTo: string) => {
   const res = await fetch(Endpoints.GET_SCHEDULES, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json', // Set the appropriate content type
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       dateFrom,

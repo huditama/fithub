@@ -19,12 +19,9 @@ const ClassCard: FC<ClassCardProps> = ({ classData }) => {
   } = classData;
 
   const backgroundImageStyle = {
-    // Conditionally set backgroundImage based on the presence of backgroundImage
     backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'none',
     backgroundSize: 'cover',
-    // Adjust backgroundPosition to start from the top and move down slightly
     backgroundPosition: 'center top calc(50% + 40px)',
-    // Add a default background color when backgroundImage is falsy
     backgroundColor: backgroundImage ? 'transparent' : '#8F979D',
   };
 

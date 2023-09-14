@@ -61,17 +61,17 @@ export const formatDates = (startDateStr: string, endDateStr: string) => {
   const startDate = new Date(startDateStr);
   const endDate = new Date(endDateStr);
 
-  // Get the day of the week in "Monday" format
+  // Get the day of the week
   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
   // Loop through the date range and format each date
   const currentDate = new Date(startDate);
   while (currentDate <= endDate) {
     const formattedDay = daysOfWeek[
-      currentDate.getUTCDay() // Use getUTCDay() to ensure UTC timezone
+      currentDate.getUTCDay()
     ];
     const year = currentDate.getUTCFullYear();
-    const month = String(currentDate.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const month = String(currentDate.getUTCMonth() + 1).padStart(2, '0');
     const day = String(currentDate.getUTCDate()).padStart(2, '0');
 
     formattedDates.push({
