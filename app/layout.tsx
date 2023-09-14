@@ -11,8 +11,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'FIT HUB SCHEDULE',
-  description: 'App to view Fit Hub weekly schedule',
+  title: 'FIT HUB ARTERI PONDOK INDAH',
+  description: 'App to view Fit Hub Pondok Indah branch weekly schedule',
 };
 
 type LayoutProps = {
