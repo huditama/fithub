@@ -90,6 +90,12 @@
     padding: 0px 16px 0px 16px;
   }
 
+  @media screen and (max-width: 480px) {
+    .heading-4 {
+      font-size: 1rem;
+    }
+  }
+
   .time-category {
     margin-top: 16px;
   }
@@ -130,6 +136,10 @@
 
         .text-base {
           font-size: 12px;
+        }
+
+        .heading-3 {
+          font-size: 5px;
         }
       }
 

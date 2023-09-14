@@ -36,7 +36,7 @@ const ClassList: FC<ClassListProps> = ({ classes }) => {
       {
         morningClasses?.length ? (
           <div className="time-category">
-            <p className="heading-3 text-bold">MORNING</p>
+            <p className="heading-4 text-bold">MORNING</p>
             {renderClassList(morningClasses)}
           </div>
         ) : null
@@ -45,7 +45,7 @@ const ClassList: FC<ClassListProps> = ({ classes }) => {
       {
         eveningClasses?.length ? (
           <div className="time-category">
-            <p className="heading-3 text-bold">EVENING</p>
+            <p className="heading-4 text-bold">EVENING</p>
             {renderClassList(eveningClasses)}
           </div>
         ) : null
